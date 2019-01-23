@@ -1,3 +1,4 @@
 {
-    "ownerID": "YOUR_ID"
+    "ownerID": "YOUR_ID",
+    "token": "THE_BOT_TOKEN"
 }

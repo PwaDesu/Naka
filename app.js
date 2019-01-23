@@ -1,7 +1,7 @@
 const { Client } = require("klasa");
 const config = require("./config");
 
-class Naga extends Client {
+class Naka extends Client {
     constructor() {
         super({
             fetchAllMembers: false,
@@ -14,4 +14,4 @@ class Naga extends Client {
     }
 }
 
-module.exports = Naga;
+module.exports = Naka;

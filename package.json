@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "discord.js": "discordjs/discord.js",
+    "klasa": "dirigeants/klasa#master"
+  },
+  "devDependencies": {
+    "@types/node": "^10.12.18"
+  }
+}

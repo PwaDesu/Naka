@@ -1,4 +1,5 @@
 {
     "ownerID": "YOUR_ID",
-    "token": "THE_BOT_TOKEN"
+    "token": "THE_BOT_TOKEN",
+    "updateBehavior": "prompt"
 }

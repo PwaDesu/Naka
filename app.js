@@ -11,6 +11,12 @@ class Naka extends Client {
             ownerID: config.ownerID,
             readyMessage: (client) => `Successfully initialized. Ready to serve ${client.guilds.size} guilds.`
         });
+        this.config = config;
+        this.package = require("./package");
+    }
+
+    async launch() {
+        await this.login(this.config.token);
     }
 }
 

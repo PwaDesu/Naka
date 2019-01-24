@@ -16,9 +16,7 @@ class SourceUpdater {
             return false;
         }
         const status = await exec("git status --porcelain=v2").catch(this._handleFailedStatusCheck.bind(this));
-        console.log(status);
-        console.log(Boolean(status))
-        if (!status) {
+        if (!status.stdout) {
             this.console.log(`No updates found, running the latest ${require("../package").version} version of Naka`);
         } else {
             if (this.config.updateBehavior === "prompt") {

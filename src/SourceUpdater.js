@@ -16,6 +16,8 @@ class SourceUpdater {
             return false;
         }
         const status = await exec("git status --porcelain=v2").catch(this._handleFailedStatusCheck.bind(this));
+        console.log(status);
+        console.log(Boolean(status))
         if (!status) {
             this.console.log(`No updates found, running the latest ${require("../package").version} version of Naka`);
         } else {
@@ -24,6 +26,7 @@ class SourceUpdater {
                 switch (prompt) {
                 case "y":
                     await this.update();
+                    break;
                 case "n":
                 default:
                     this.console.log(`Update declined, running the outdated ${require("../package").version} version of Naka`);
@@ -67,7 +70,7 @@ class SourceUpdater {
     }
 
     async _updateConfig() {
-        const exampleConfig = require("../config-example");
+        const exampleConfig = require("../config.example");
         const exampleKeys = Object.keys(exampleConfig);
         const configKeys = Object.keys(this.config);
         if (exampleKeys.length !== configKeys.length) {
@@ -77,9 +80,9 @@ class SourceUpdater {
                 }
             }
         }
-        await fs.writeFile(require("path").join(__dirname, "..", "config-example.json"), JSON.stringify(this.config, null, 4));
+        await fs.writeFile(require("path").join(__dirname, "..", "config.json"), JSON.stringify(this.config, null, 4));
         delete require.cache[require.resolve("../config")];
-        delete require.cache[require.resolve("../config-example")];
+        delete require.cache[require.resolve("../config.example")];
         return this.console.log("The config file has been updated with new options, you may want to take a look at it");
     }
 }

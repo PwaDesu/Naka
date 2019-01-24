@@ -1,4 +1,20 @@
 {
+  "name": "naka",
+  "version": "0.0.1",
+  "description": "Naka, a small, non-scalable bot meant for self-hosting",
+  "main": "start.js",
+  "author": "ParadoxOrigins",
+  "contributors": [
+      {
+          "name": "Niputi"
+      }
+  ],
+  "repository": "github:ParadoxOrigins/Naka",
+  "license": "GPL-3.0",
+  "scripts": {
+      "start": "node start.js",
+      "eslint-check": "eslint ."
+  },
   "dependencies": {
     "discord.js": "discordjs/discord.js",
     "klasa": "dirigeants/klasa#master"

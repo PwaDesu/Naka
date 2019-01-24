@@ -2,5 +2,6 @@
     "ownerID": "YOUR_ID",
     "token": "THE_BOT_TOKEN",
     "updateBehavior": "prompt",
-    "repository": "ParadoxOrigins/Naka"
+    "repository": "ParadoxOrigins/Naka",
+    "test": true
 }

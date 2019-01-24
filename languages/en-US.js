@@ -176,7 +176,18 @@ module.exports = class extends Language {
                 `• Shard      :: ${(message.guild ? message.guild.shardID : 0) + 1} / ${this.client.options.totalShardCount}`
             ],
             COMMAND_STATS_DESCRIPTION: "Provides some details about the bot and stats.",
-            MESSAGE_PROMPT_TIMEOUT: "The prompt has timed out."
+            MESSAGE_PROMPT_TIMEOUT: "The prompt has timed out.",
+            COMMAND_LSAR_DESCRIPTION: "List all self-assignable roles currently set",
+            COMMAND_LSAR_NO_ROLES_SET: "No role as been defined as self-assignable",
+            COMMAND_LSAR_LIST_ROLES: (roles, message) => {
+                return {
+                    description: roles.map(r => `@&${r}`).join("\n"),
+                    fields: [{
+                        name: "Self-assignable roles list",
+                        value: "You can assign those roles to yourself using the `iam` command like this: `iam <role_name>`\n\nExample: `iam " + message.guild.roles.get(roles[0]).name + "`"
+                    }]
+                };
+            }
         };
     }
 

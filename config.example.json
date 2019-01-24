@@ -3,5 +3,6 @@
     "token": "THE_BOT_TOKEN",
     "updateBehavior": "prompt",
     "repository": "ParadoxOrigins/Naka",
-    "selfAssignableRoles": ["AN_ID", "ANOTHER_ID"]
+    "selfAssignableRoles": ["AN_ID", "ANOTHER_ID"],
+    "language": "en-US"
 }

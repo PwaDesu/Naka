@@ -39,7 +39,8 @@ class SourceUpdater {
         return true;
     }
 
-    _handleFailedStatusCheck() {
+    _handleFailedStatusCheck(err) {
+        console.log(err);
         this.console.warn(`Failed to check for available updates, running the possibly outdated ${require("../package").version} version of Naka`);
     }
 

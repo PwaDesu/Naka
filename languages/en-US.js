@@ -49,6 +49,17 @@ module.exports = class extends Language {
             COMMANDMESSAGE_MISSING_REQUIRED: (name) => `${name} is a required argument.`,
             COMMANDMESSAGE_MISSING_OPTIONALS: (possibles) => `Missing a required option: (${possibles})`,
             COMMANDMESSAGE_NOMATCH: (possibles) => `Your option didn't match any of the possibilities: (${possibles})`,
+            COMMANDMESSAGE_MULTIPLE_ROLES_FOUND: (roles) => {
+                let i = 1;
+                return {
+                    description: "```\n" + roles.map(r => `[${i++}] - ${r.name}\n`) + "```",
+                    fields: [{
+                        name: "Multiple roles found",
+                        value: "Multiple roles corresponding to this name have been found, select one by typing its corresponding number"
+                    }]
+                };
+            },
+            COMMANDMESSAGE_ROLE_HIGHER_THAN_BOT: "This role is higher than my highest role!",
             // eslint-disable-next-line max-len
             MONITOR_COMMAND_HANDLER_REPROMPT: (tag, error, time, abortOptions) => `${tag} | **${error}** | You have **${time}** seconds to respond to this prompt with a valid argument. Type **${abortOptions.join("**, **")}** to abort this prompt.`,
             // eslint-disable-next-line max-len
@@ -177,17 +188,29 @@ module.exports = class extends Language {
             ],
             COMMAND_STATS_DESCRIPTION: "Provides some details about the bot and stats.",
             MESSAGE_PROMPT_TIMEOUT: "The prompt has timed out.",
-            COMMAND_LSAR_DESCRIPTION: "List all self-assignable roles currently set",
-            COMMAND_LSAR_NO_ROLES_SET: "No role as been defined as self-assignable",
+            COMMAND_LSAR_DESCRIPTION: "List all self-assignable roles currently set.",
+            COMMAND_LSAR_NO_ROLES_SET: "No role as been defined as self-assignable.",
             COMMAND_LSAR_LIST_ROLES: (roles, message) => {
                 return {
                     description: roles.map(r => `@&${r}`).join("\n"),
                     fields: [{
                         name: "Self-assignable roles list",
-                        value: "You can assign those roles to yourself using the `iam` command like this: `iam <role_name>`\n\nExample: `iam " + message.guild.roles.get(roles[0]).name + "`"
+                        value: [
+                            "You can assign those roles to yourself using the `iam` command like this: `iam <role_name>`\n\n",
+                            "Example: `iam " + message.guild.roles.get(roles[0]).name + "`\n\n",
+                            "You can remove from yourself any of those roles using the `iamnot` command the same way."
+                        ].join("")
                     }]
                 };
-            }
+            },
+            COMMAND_IAM_DESCRIPTION: "Allows you to assign to yourself a self-assignable role.",
+            COMMAND_IAM_NO_ROLE_GIVEN: "You must specify the name of the role you want to assign to yourself.",
+            COMMAND_IAM_ALREADY_HAS_ROLE: "You already have this role!",
+            COMMAND_IAM_ROLE_GIVEN: (role) => ":white_check_mark: You now have the `" + role.name + "` role",
+            COMMAND_IAMNOT_DESCRIPTION: "Allows you to remove from yourself a self-assignable role.",
+            COMMAND_IAMNOT_NO_ROLE_GIVEN: "You must specify the role you want to remove from yourself.",
+            COMMAND_IAMNOT_HAS_NOT_ROLE: "You don't have this role!",
+            COMMAND_IAMNOT_ROLE_REMOVED: (role) => ":white_check_mark: You don't have the `" + role.name + "` role anymore."
         };
     }
 

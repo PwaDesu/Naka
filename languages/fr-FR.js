@@ -1,4 +1,5 @@
 const { Language, util } = require("klasa");
+const { MessageEmbed } = require("discord.js");
 
 module.exports = class extends Language {
 
@@ -51,15 +52,16 @@ module.exports = class extends Language {
             COMMANDMESSAGE_NOMATCH: (possibles) => `L'option que vous avez spécifié ne fait pas partie des possibilités: (${possibles})`,
             COMMANDMESSAGE_MULTIPLE_ROLES_FOUND: (roles) => {
                 let i = 1;
-                return {
+                return new MessageEmbed({
                     description: "```\n" + roles.map(r => `[${i++}] - ${r.name}\n`) + "```",
                     fields: [{
                         name: "Plusieurs rôles trouvées",
                         value: "Plusieurs rôles correspondant a ce nom ont été trouvé, sélectionner en un en tapant son numéro"
                     }]
-                };
+                });
             },
             COMMANDMESSAGE_ROLE_HIGHER_THAN_BOT: "Ce rôle est plus haut que mon plus haut rôle!",
+            COMMANDMESSAGE_NO_ROLE_FOUND: "Je n'ai pas pu trouvé de rôle correspondant a ce nom",
             // eslint-disable-next-line max-len
             MONITOR_COMMAND_HANDLER_REPROMPT: (tag, error, time, abortOptions) => `${tag} | **${error}** | Vous avez **${time}** secondes pour répondre a cette question avec un argument valide. Tapez **${abortOptions.join("**, **")}** pour annuler.`,
             // eslint-disable-next-line max-len
@@ -190,19 +192,18 @@ module.exports = class extends Language {
             MESSAGE_PROMPT_TIMEOUT: "La question a expirée.",
             COMMAND_LSAR_DESCRIPTION: "Liste les rôles actuellement défini en tant qu'auto-assignable.",
             COMMAND_LSAR_NO_ROLES_SET: "Aucun rôle n'a été défini en tant qu'auto-assignable.",
-            COMMAND_LSAR_LIST_ROLES: (roles, message) => {
-                return {
-                    description: roles.map(r => `@&${r}`).join("\n"),
-                    fields: [{
-                        name: "Liste des rôles auto-assignables",
-                        value: [
-                            "Vous pouvez vous assigner ces rôles vous-même en utilisant la commande `iam` comme ceci: `iam <nom_du_role>`\n\n",
-                            "Exemple: `iam " + message.guild.roles.get(roles[0]).name + "`\n\n",
-                            "Vous pouvez retirer ces rôles de vous-même à tout moment avec la commande `iamnot` de la même façon"
-                        ].join("")
-                    }]
-                };
-            },
+            COMMAND_LSAR_LIST_ROLES: (roles, message) => new MessageEmbed({
+                title: `Liste des rôles auto-assignables de ${message.guild.name}`,
+                description: roles.map(r => `<@&${r}>`).join("\n"),
+                fields: [{
+                    name: "Liste des rôles auto-assignables",
+                    value: [
+                        "Vous pouvez vous assigner les rôles ci-dessus vous-même en utilisant la commande `iam` comme ceci: `iam <nom_du_role>`\n\n",
+                        "Exemple: `iam " + message.guild.roles.highest.name + "`\n\n",
+                        "Vous pouvez retirer ces rôles de vous-même à tout moment avec la commande `iamnot` de la même façon"
+                    ].join("")
+                }]
+            }),
             COMMAND_IAM_DESCRIPTION: "Permet de s'assigner un rôle défini en tant qu'auto-assignable a soi-même.",
             COMMAND_IAM_NO_ROLE_GIVEN: "Vous devez spécifier le nom du rôle que vous voulez vous assigner.",
             COMMAND_IAM_ALREADY_HAS_ROLE: "Vous avez déjà ce rôle!",

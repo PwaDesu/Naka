@@ -13,7 +13,7 @@ module.exports = class extends Command {
         if (!this.client.config.selfAssignableRoles.length) {
             return message.sendLocale("COMMAND_LSAR_NO_ROLES_SET");
         }
-        return message.sendLocale("COMMAND_LSAR_LIST_ROLES", [this.client.config.selfAssignableRoles]);
+        return message.sendLocale("COMMAND_LSAR_LIST_ROLES", [this.client.config.selfAssignableRoles, message]);
     }
 
 };

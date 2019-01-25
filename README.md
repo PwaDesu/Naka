@@ -53,7 +53,7 @@ The default language of the bot, currently can be:
 
 ### Config.selectionChannel
 
-The "selection channel" is a channel meant solely to select self-assignable roles, if you put a channel ID there, every message, except messages from the bot itself, will be deleted
+The "selection channel" is a channel meant solely to select self-assignable roles, if you put a channel ID there, every message in this channel, except messages from the bot itself, will be deleted
 
 #### Getting roles IDs
 

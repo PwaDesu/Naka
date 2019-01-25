@@ -4,5 +4,6 @@
     "updateBehavior": "prompt",
     "repository": "ParadoxOrigins/Naka",
     "selfAssignableRoles": ["AN_ID", "ANOTHER_ID"],
-    "language": "en-US"
+    "language": "en-US",
+    "selectionChannel": "A_CHANNEL_ID"
 }

@@ -26,8 +26,8 @@ module.exports = class extends Extendable {
                 resolved.push(role);
             }
         }
-        if (!resolved[0]) {
-            return undefined;
+        if (!resolved[1]) {
+            return resolved[0];
         } else if (resolved.length > 1 && exactMatches === 1) {
             return resolved.find(r => r.name === resolvable);
         } else if (resolved.length > 1 && !exactMatches && caseInsensitiveExactMatches === 1) {

@@ -7,6 +7,7 @@ module.exports = class extends Command {
             aliases: ["listsar"],
             description: language => language.get("COMMAND_LSAR_DESCRIPTION")
         });
+        this.name = "lsar";
     }
 
     async run(message) {

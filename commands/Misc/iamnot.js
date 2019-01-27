@@ -8,6 +8,7 @@ module.exports = class extends Command {
             description: language => language.get("COMMAND_IAMNOT_DESCRIPTION"),
             runIn: ["text"]
         });
+        this.name = "iamnot";
     }
 
     async run(message) {

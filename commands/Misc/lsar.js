@@ -12,9 +12,13 @@ module.exports = class extends Command {
 
     async run(message) {
         if (!this.client.config.selfAssignableRoles.length) {
-            return message.sendLocale("COMMAND_LSAR_NO_ROLES_SET");
+            return message.sendLocale("COMMAND_LSAR_NO_ROLES_SET").then(m => m.delete({ timeout: 5000 }));
         }
-        return message.sendLocale("COMMAND_LSAR_LIST_ROLES", [this.client.config.selfAssignableRoles, message]);
+        return message.sendLocale("COMMAND_LSAR_LIST_ROLES", [this.client.config.selfAssignableRoles, message]).then(m => {
+            if (m.channel.id === this.client.config.selectionChannel && !message.flags["noDelete"] && !message.flags["nodelete"]) {
+                return m.delete({ timeout: 5000 });
+            }
+        })
     }
 
 };
